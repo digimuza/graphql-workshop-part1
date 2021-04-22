@@ -1,0 +1,17 @@
+query getPost($id: Int!) {
+  post(where: { id: $id }) {
+    id
+    title
+    content
+    author {
+      name
+    }
+  }
+}
+
+query getPosts {
+  posts {
+    id
+    title
+  }
+}
