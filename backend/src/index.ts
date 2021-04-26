@@ -7,14 +7,11 @@ import { AuthChecker, Authorized, buildSchema } from "type-graphql";
 import * as P from 'ts-prime'
 import { PrismaClient } from ".prisma/client";
 import { applyResolversEnhanceMap } from './@generated/typegraphql-prisma/enhance';
+import { HelloWorldResolver } from "./resolvers/HelloWorldResolver";
+import { AppContext } from "./@types";
 // I like to use redis for this: https://github.com/tj/connect-redis
 
-interface AppContext {
-  prisma: PrismaClient
-  userId: number
-  req: Request,
-  res: Response
-}
+
 
 export const customAuthChecker: AuthChecker<AppContext> = async (ctx, roles) => {
   console.debug(ctx, roles)
@@ -34,7 +31,11 @@ export const customAuthChecker: AuthChecker<AppContext> = async (ctx, roles) => 
   const apolloServer = await P.canFail(async () => {
     return new ApolloServer({
       schema: await buildSchema({
-        resolvers: [...crudResolvers, ...relationResolvers],
+        resolvers: [
+          ...crudResolvers,
+          ...relationResolvers,
+          HelloWorldResolver
+        ],
         validate: false,
         authChecker: customAuthChecker,
 
