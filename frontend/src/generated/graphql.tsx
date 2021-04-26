@@ -122,6 +122,8 @@ export type Mutation = {
   deleteManyUser: AffectedRowsOutput;
   updateManyUser: AffectedRowsOutput;
   upsertUser: User;
+  myNameIs: Scalars['String'];
+  mutationWithArgs: Scalars['String'];
 };
 
 
@@ -190,6 +192,11 @@ export type MutationUpsertUserArgs = {
   where: UserWhereUniqueInput;
   create: UserCreateInput;
   update: UserUpdateInput;
+};
+
+
+export type MutationMutationWithArgsArgs = {
+  name: Scalars['String'];
 };
 
 export type NestedBoolFilter = {
@@ -555,6 +562,9 @@ export type Query = {
   users: Array<User>;
   aggregateUser: AggregateUser;
   groupByUser: Array<UserGroupBy>;
+  helloWorld: Scalars['String'];
+  helloWorldWithArgs: Scalars['String'];
+  sampleEndpoint: ReturnObject;
 };
 
 
@@ -643,6 +653,17 @@ export type QueryGroupByUserArgs = {
   having?: Maybe<UserScalarWhereWithAggregatesInput>;
   take?: Maybe<Scalars['Int']>;
   skip?: Maybe<Scalars['Int']>;
+};
+
+
+export type QueryHelloWorldWithArgsArgs = {
+  name: Scalars['String'];
+};
+
+export type ReturnObject = {
+  __typename?: 'ReturnObject';
+  id: Scalars['String'];
+  name: Scalars['String'];
 };
 
 export enum SortOrder {
@@ -900,6 +921,20 @@ export type GetPostsQuery = (
   )> }
 );
 
+export type CreatePostMutationVariables = Exact<{
+  email: Scalars['String'];
+  title: Scalars['String'];
+}>;
+
+
+export type CreatePostMutation = (
+  { __typename?: 'Mutation' }
+  & { createPost: (
+    { __typename?: 'Post' }
+    & Pick<Post, 'id'>
+  ) }
+);
+
 
 export const GetPostDocument = gql`
     query getPost($id: Int!) {
@@ -976,3 +1011,39 @@ export function useGetPostsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<G
 export type GetPostsQueryHookResult = ReturnType<typeof useGetPostsQuery>;
 export type GetPostsLazyQueryHookResult = ReturnType<typeof useGetPostsLazyQuery>;
 export type GetPostsQueryResult = Apollo.QueryResult<GetPostsQuery, GetPostsQueryVariables>;
+export const CreatePostDocument = gql`
+    mutation createPost($email: String!, $title: String!) {
+  createPost(
+    data: {title: $title, content: "Woooooow", author: {connectOrCreate: {create: {name: "Andrius", email: $email}, where: {email: $email}}}}
+  ) {
+    id
+  }
+}
+    `;
+export type CreatePostMutationFn = Apollo.MutationFunction<CreatePostMutation, CreatePostMutationVariables>;
+
+/**
+ * __useCreatePostMutation__
+ *
+ * To run a mutation, you first call `useCreatePostMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreatePostMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createPostMutation, { data, loading, error }] = useCreatePostMutation({
+ *   variables: {
+ *      email: // value for 'email'
+ *      title: // value for 'title'
+ *   },
+ * });
+ */
+export function useCreatePostMutation(baseOptions?: Apollo.MutationHookOptions<CreatePostMutation, CreatePostMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreatePostMutation, CreatePostMutationVariables>(CreatePostDocument, options);
+      }
+export type CreatePostMutationHookResult = ReturnType<typeof useCreatePostMutation>;
+export type CreatePostMutationResult = Apollo.MutationResult<CreatePostMutation>;
+export type CreatePostMutationOptions = Apollo.BaseMutationOptions<CreatePostMutation, CreatePostMutationVariables>;

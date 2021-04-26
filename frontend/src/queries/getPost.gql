@@ -15,3 +15,20 @@ query getPosts {
     title
   }
 }
+
+mutation createPost($email: String!, $title: String!) {
+  createPost(
+    data: {
+      title: $title
+      content: "Woooooow"
+      author: {
+        connectOrCreate: {
+          create: { name: "Andrius", email: $email }
+          where: { email: $email }
+        }
+      }
+    }
+  ) {
+    id
+  }
+}

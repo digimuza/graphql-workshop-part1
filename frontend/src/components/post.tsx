@@ -1,4 +1,8 @@
-import { useGetPostQuery, useGetPostsQuery } from "../generated/graphql";
+import {
+  useGetPostQuery,
+  useGetPostsQuery,
+  useCreatePostMutation,
+} from "../generated/graphql";
 
 export const Post = (props: { id: number }) => {
   const { id } = props;
@@ -46,5 +50,36 @@ export const Posts = () => {
         return <li>{title.title}</li>;
       })}
     </ul>
+  );
+};
+
+export const CreatePost = () => {
+  const [createPost, { data, error, loading }] = useCreatePostMutation();
+
+  if (error) {
+    return <div>{error.message}</div>;
+  }
+
+  if (data) {
+    return <div>Post created: {data.createPost.id}</div>;
+  }
+  return (
+    <div>
+      <form
+        onSubmit={async (form) => {
+          if (loading) return;
+          const formData = new FormData(form.currentTarget);
+          createPost({
+            variables: {
+              title: String(formData.get("title") || ""),
+              email: "andriusmozuraitis@gmail.com",
+            },
+          });
+        }}
+      >
+        <input type="text" name={"title"} />
+        <button disabled={loading} type={"submit"}></button>
+      </form>
+    </div>
   );
 };
