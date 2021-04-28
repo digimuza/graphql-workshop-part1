@@ -3,12 +3,13 @@ import { crudResolvers, relationResolvers } from "./@generated/typegraphql-prism
 
 import express from "express";
 import { ApolloServer } from "apollo-server-express";
-import { AuthChecker, Authorized, buildSchema } from "type-graphql";
+import { AuthChecker, Authorized, buildSchema, Extensions } from "type-graphql";
 import * as P from 'ts-prime'
 import { PrismaClient } from ".prisma/client";
-import { applyResolversEnhanceMap } from './@generated/typegraphql-prisma/enhance';
+import { applyResolversEnhanceMap, applyOutputTypesEnhanceMap, applyInputTypesEnhanceMap } from './@generated/typegraphql-prisma/enhance';
 import { HelloWorldResolver } from "./resolvers/HelloWorldResolver";
 import { AppContext } from "./@types";
+import { IsEmail } from "class-validator";
 // I like to use redis for this: https://github.com/tj/connect-redis
 
 
@@ -21,7 +22,28 @@ export const customAuthChecker: AuthChecker<AppContext> = async (ctx, roles) => 
 (async () => {
   applyResolversEnhanceMap({
     Post: {
-      _all: [Authorized()]
+      _all: [Authorized()],
+    },
+    User: {
+      _all: [Authorized()],
+    }
+  })
+
+  applyInputTypesEnhanceMap({
+    UserCreateWithoutPostsInput: {
+      fields: {
+        email: [IsEmail()]
+      }
+    },
+    UserWhereUniqueInput: {
+      fields: {
+        email: [IsEmail()]
+      }
+    },
+    UserCreateInput: {
+      fields: {
+        email: [IsEmail()]
+      }
     }
   })
   const app = express();
@@ -33,7 +55,7 @@ export const customAuthChecker: AuthChecker<AppContext> = async (ctx, roles) => 
       schema: await buildSchema({
         resolvers: [
           ...crudResolvers,
-          ...relationResolvers,
+          // ...relationResolvers,
           HelloWorldResolver
         ],
         validate: false,
