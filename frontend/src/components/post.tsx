@@ -6,7 +6,9 @@ import {
 
 export const Post = (props: { id: number }) => {
   const { id } = props;
-  const { data, loading, error } = useGetPostQuery({ variables: { id } });
+  const { data, loading, error } = useGetPostQuery({
+    variables: { id },
+  });
 
   if (loading) {
     return <div>loading...</div>;

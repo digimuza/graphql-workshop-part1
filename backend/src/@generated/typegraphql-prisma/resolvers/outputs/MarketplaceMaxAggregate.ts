@@ -1,0 +1,64 @@
+import * as TypeGraphQL from "type-graphql";
+import * as GraphQLScalars from "graphql-scalars";
+import { Prisma } from "@prisma/client";
+import { DecimalJSScalar } from "../../scalars";
+
+@TypeGraphQL.ObjectType({
+  isAbstract: true
+})
+export class MarketplaceMaxAggregate {
+  @TypeGraphQL.Field(_type => String, {
+    nullable: true
+  })
+  id!: string | null;
+
+  @TypeGraphQL.Field(_type => Date, {
+    nullable: true
+  })
+  createdAt!: Date | null;
+
+  @TypeGraphQL.Field(_type => Date, {
+    nullable: true
+  })
+  updatedAt!: Date | null;
+
+  @TypeGraphQL.Field(_type => String, {
+    nullable: true
+  })
+  ownerId!: string | null;
+
+  @TypeGraphQL.Field(_type => Boolean, {
+    nullable: true
+  })
+  isCurrent!: boolean | null;
+
+  @TypeGraphQL.Field(_type => Boolean, {
+    nullable: true
+  })
+  isLast!: boolean | null;
+
+  @TypeGraphQL.Field(_type => String, {
+    nullable: true
+  })
+  companyId!: string | null;
+
+  @TypeGraphQL.Field(_type => String, {
+    nullable: true
+  })
+  drumId!: string | null;
+
+  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+    nullable: true
+  })
+  gracePeriodInDays!: number | null;
+
+  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+    nullable: true
+  })
+  minimumRentPeriodInMonths!: number | null;
+
+  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+    nullable: true
+  })
+  reservationPeriodInDays!: number | null;
+}

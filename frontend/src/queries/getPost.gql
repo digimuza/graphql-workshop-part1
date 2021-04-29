@@ -3,9 +3,6 @@ query getPost($id: Int!) {
     id
     title
     content
-    author {
-      name
-    }
   }
 }
 
@@ -22,13 +19,16 @@ mutation createPost($email: String!, $title: String!) {
       title: $title
       content: "Woooooow"
       author: {
-        connectOrCreate: {
-          create: { name: "Andrius", email: $email }
-          where: { email: $email }
-        }
+        connectOrCreate: { create: { email: $email }, where: { email: $email } }
       }
     }
   ) {
+    id
+  }
+}
+
+mutation createUser($email: String!) {
+  createUser(data: { email: $email }) {
     id
   }
 }

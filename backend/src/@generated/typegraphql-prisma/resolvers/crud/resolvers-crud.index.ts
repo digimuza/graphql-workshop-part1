@@ -1,2 +1,10 @@
+export { CompanyCrudResolver } from "./Company/CompanyCrudResolver";
+export { CompanyUserCrudResolver } from "./CompanyUser/CompanyUserCrudResolver";
+export { DrumCrudResolver } from "./Drum/DrumCrudResolver";
+export { DrumMovementHistoryCrudResolver } from "./DrumMovementHistory/DrumMovementHistoryCrudResolver";
+export { DrumStateHistoryCrudResolver } from "./DrumStateHistory/DrumStateHistoryCrudResolver";
+export { DrumTypeCrudResolver } from "./DrumType/DrumTypeCrudResolver";
+export { LocationCrudResolver } from "./Location/LocationCrudResolver";
+export { MarketplaceCrudResolver } from "./Marketplace/MarketplaceCrudResolver";
 export { PostCrudResolver } from "./Post/PostCrudResolver";
 export { UserCrudResolver } from "./User/UserCrudResolver";

@@ -1,2 +1,10 @@
+export { CompanyRelationsResolver } from "./Company/CompanyRelationsResolver";
+export { CompanyUserRelationsResolver } from "./CompanyUser/CompanyUserRelationsResolver";
+export { DrumRelationsResolver } from "./Drum/DrumRelationsResolver";
+export { DrumMovementHistoryRelationsResolver } from "./DrumMovementHistory/DrumMovementHistoryRelationsResolver";
+export { DrumStateHistoryRelationsResolver } from "./DrumStateHistory/DrumStateHistoryRelationsResolver";
+export { DrumTypeRelationsResolver } from "./DrumType/DrumTypeRelationsResolver";
+export { LocationRelationsResolver } from "./Location/LocationRelationsResolver";
+export { MarketplaceRelationsResolver } from "./Marketplace/MarketplaceRelationsResolver";
 export { PostRelationsResolver } from "./Post/PostRelationsResolver";
 export { UserRelationsResolver } from "./User/UserRelationsResolver";

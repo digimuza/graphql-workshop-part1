@@ -1,5 +1,4 @@
 import "reflect-metadata";
-import { crudResolvers, relationResolvers } from "./@generated/typegraphql-prisma";
 
 import express from "express";
 import { ApolloServer } from "apollo-server-express";
@@ -10,12 +9,14 @@ import { applyResolversEnhanceMap, applyOutputTypesEnhanceMap, applyInputTypesEn
 import { HelloWorldResolver } from "./resolvers/HelloWorldResolver";
 import { AppContext } from "./@types";
 import { IsEmail } from "class-validator";
+import { crudResolvers, relationResolvers } from './@generated/typegraphql-prisma/index';
 // I like to use redis for this: https://github.com/tj/connect-redis
 
 
 
 export const customAuthChecker: AuthChecker<AppContext> = async (ctx, roles) => {
   console.debug(ctx, roles)
+
   return true; // or false if access is denied
 };
 
@@ -23,7 +24,9 @@ export const customAuthChecker: AuthChecker<AppContext> = async (ctx, roles) => 
   applyResolversEnhanceMap({
     Post: {
       _all: [Authorized()],
+
     },
+
     User: {
       _all: [Authorized()],
     }
@@ -55,7 +58,7 @@ export const customAuthChecker: AuthChecker<AppContext> = async (ctx, roles) => 
       schema: await buildSchema({
         resolvers: [
           ...crudResolvers,
-          // ...relationResolvers,
+          ...relationResolvers,
           HelloWorldResolver
         ],
         validate: false,

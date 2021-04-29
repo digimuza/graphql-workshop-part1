@@ -1,3 +1,6 @@
+Presentation
+https://drive.google.com/file/d/1yxvzScu7ro_avNTsG3h2IaiacE8SBtlq/view?usp=sharing
+
 ## Modern app structure requirements
 
 1. Easy to make changes

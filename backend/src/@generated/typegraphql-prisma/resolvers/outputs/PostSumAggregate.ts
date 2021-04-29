@@ -11,9 +11,4 @@ export class PostSumAggregate {
     nullable: false
   })
   id!: number;
-
-  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
-    nullable: true
-  })
-  authorId!: number | null;
 }

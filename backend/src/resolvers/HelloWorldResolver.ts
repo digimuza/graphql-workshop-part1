@@ -1,4 +1,4 @@
-import { Arg, Ctx, Field, Mutation, ObjectType, Query, Resolver } from "type-graphql";
+import { Arg, Ctx, Field, InputType, Mutation, ObjectType, Query, Resolver } from "type-graphql";
 import { AppContext } from '../@types/index';
 
 // ObjectType
@@ -12,6 +12,15 @@ class ReturnObject {
 }
 
 // InputType
+
+@InputType()
+class Name {
+    @Field()
+    first: string
+    @Field()
+    last: string
+}
+
 @Resolver()
 export class HelloWorldResolver {
     @Query(() => String)
@@ -37,6 +46,16 @@ export class HelloWorldResolver {
     @Query(() => ReturnObject)
     sampleEndpoint() {
         const obj = Object.assign(new ReturnObject(), { id: "123", name: "Petriukas" })
+        return obj
+    }
+
+
+    @Query(() => ReturnObject)
+    sampleEndpoint2(@Arg("data") data: Name) {
+        if ("Asd") {
+            throw new Error("Fail")
+        }
+        const obj = Object.assign(new ReturnObject(), { id: data.last, name: data.first })
         return obj
     }
 }

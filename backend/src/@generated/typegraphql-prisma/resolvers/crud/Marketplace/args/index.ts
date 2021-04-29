@@ -1,0 +1,11 @@
+export { AggregateMarketplaceArgs } from "./AggregateMarketplaceArgs";
+export { CreateMarketplaceArgs } from "./CreateMarketplaceArgs";
+export { DeleteManyMarketplaceArgs } from "./DeleteManyMarketplaceArgs";
+export { DeleteMarketplaceArgs } from "./DeleteMarketplaceArgs";
+export { FindFirstMarketplaceArgs } from "./FindFirstMarketplaceArgs";
+export { FindManyMarketplaceArgs } from "./FindManyMarketplaceArgs";
+export { FindUniqueMarketplaceArgs } from "./FindUniqueMarketplaceArgs";
+export { GroupByMarketplaceArgs } from "./GroupByMarketplaceArgs";
+export { UpdateManyMarketplaceArgs } from "./UpdateManyMarketplaceArgs";
+export { UpdateMarketplaceArgs } from "./UpdateMarketplaceArgs";
+export { UpsertMarketplaceArgs } from "./UpsertMarketplaceArgs";

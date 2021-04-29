@@ -7,10 +7,10 @@ import { DecimalJSScalar } from "../../scalars";
   isAbstract: true
 })
 export class UserMaxAggregate {
-  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
-    nullable: false
+  @TypeGraphQL.Field(_type => String, {
+    nullable: true
   })
-  id!: number;
+  id!: string | null;
 
   @TypeGraphQL.Field(_type => String, {
     nullable: true
@@ -20,5 +20,15 @@ export class UserMaxAggregate {
   @TypeGraphQL.Field(_type => String, {
     nullable: true
   })
-  name!: string | null;
+  fullName!: string | null;
+
+  @TypeGraphQL.Field(_type => Date, {
+    nullable: true
+  })
+  createdAt!: Date | null;
+
+  @TypeGraphQL.Field(_type => Date, {
+    nullable: true
+  })
+  updatedAt!: Date | null;
 }
