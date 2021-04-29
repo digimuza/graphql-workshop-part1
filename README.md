@@ -11,7 +11,7 @@ https://drive.google.com/file/d/1yxvzScu7ro_avNTsG3h2IaiacE8SBtlq/view?usp=shari
 
 ## Stack
 
-1. Apolo GraphQL
-2. type-graphql
-3. prisma
-4. class-validator
+1. (Apolo GraphQL)[https://www.apollographql.com/]
+2. (TypeGraphQL)[https://typegraphql.com/]
+3. (Prisma)[prisma.io]
+4. (class-validator)[https://github.com/typestack/class-validator]
